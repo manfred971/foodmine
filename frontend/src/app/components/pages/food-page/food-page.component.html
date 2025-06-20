@@ -1,0 +1,55 @@
+<app-not-found
+[Visible]="!food.id"
+ResetLinkText="Food Not Found "
+NotFoundMessage="Food with this ID does not exist">
+</app-not-found>
+<div class="container" *ngIf="food.id">
+    <img [src]="food.imageUrl" [alt]="food.name" />
+    <div class="details">
+        <div class="header">
+            <span class="name">{{ food.name }}</span>
+            <span class="favorite {{food.favorite?'':'not'}}">
+                ❤
+            </span>
+        </div>
+        <div class="stars">
+            <p-rating 
+            [readonly]="true" 
+            [stars]="5"
+            [cancel]="false"
+            [stars]="food.stars"
+            styleClass="custom-rating">
+          </p-rating>
+          </div>
+          <div class="origins">
+            <span *ngFor="let origin of food.origins">
+              {{origin}}
+            </span>
+          </div>
+          <div class="tags">
+            <a
+              *ngFor="let tag of food.tags"
+              routerLink="/tag/{{ tag}}"
+            >
+                {{ tag }}
+            </a>
+          </div>
+          <div class="cook-time">
+            <span>Time to cook about <strong>{{food.cookTime}}</strong>minutes</span>
+            
+          </div>
+    
+          <div class="price">
+            <span>
+              {{food.price | currency}}
+            </span>
+          </div>
+          <button
+            class="btn btn-primary" (click)="addToCart()">
+            Add to cart
+          </button>
+        
+    </div>
+    
+      
+</div>
