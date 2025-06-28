@@ -20,11 +20,14 @@ constructor(activatedRoute: ActivatedRoute, private foodService: FoodService
   ,private cartService: CartService , private router :Router) {
   activatedRoute.params.subscribe( (params) => {
     if (params.id) {
-      this.food = this.foodService.getFoodById(params.id);
+      foodService.getFoodById(params.id).subscribe(serverFood => {
+        this.food = serverFood;
+      });
     }
-  }
- )} 
- addToCart(){
+  });
+}
+
+addToCart(){
   this.cartService.addToCart(this.food);
   this.router.navigateByUrl('/cart-page');
 }

@@ -13,8 +13,10 @@ import { CommonModule } from '@angular/common';
 })
 export class TagsComponent {
   tags?:Tag[];
-  constructor(foodService:FoodService) {
-    this.tags = foodService.getAllTags();
+  constructor(private foodService:FoodService) {
+    foodService.getAllTags().subscribe(serverTags => {
+      this.tags = serverTags;
+    });
   }
 
 }
